@@ -1,6 +1,7 @@
 #ifndef GRAPHNODE_H_
 #define GRAPHNODE_H_
 
+#include <memory>
 #include <vector>
 #include <string>
 #include "chatbot.h"
@@ -49,7 +50,7 @@ public:
     //// STUDENT CODE
     ////
 
-    void MoveChatbotHere(std::unique_ptr<ChatBot> *chatbot);
+    void MoveChatbotHere(std::unique_ptr<ChatBot> chatbot);
 
     ////
     //// EOF STUDENT CODE
