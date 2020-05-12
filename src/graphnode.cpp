@@ -1,6 +1,8 @@
 #include "graphedge.h"
 #include "graphnode.h"
 
+#include <iostream>
+
 GraphNode::GraphNode(int id)
 {
     _id = id;
@@ -10,8 +12,13 @@ GraphNode::~GraphNode()
 {
     //// STUDENT CODE
     ////
-
-    delete _chatBot; 
+     std::cout << "Deleting chatbot.";
+    if (_chatBot != nullptr)
+    {
+        std::cout << " Pointer is not NUll";
+        delete _chatBot; 
+    }
+    std::cout << std::endl;
 
     ////
     //// EOF STUDENT CODE
@@ -34,9 +41,9 @@ void GraphNode::AddEdgeToChildNode(GraphEdge *edge)
 
 //// STUDENT CODE
 ////
-void GraphNode::MoveChatbotHere(std::unique_ptr<ChatBot> chatbot)
+void GraphNode::MoveChatbotHere(ChatBot *chatbot)
 {
-    _chatBot = std::move(chatbot);
+    _chatBot = chatbot;
     _chatBot->SetCurrentNode(this);
 }
 
