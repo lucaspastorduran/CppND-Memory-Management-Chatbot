@@ -15,10 +15,8 @@ GraphNode::~GraphNode()
      std::cout << "GraphNode Destructor." << std::endl;
     if (_chatBot != nullptr)
     {
-        std::cout << " Pointer is not NUll";
         delete _chatBot; 
     }
-    std::cout << std::endl;
 
     ////
     //// EOF STUDENT CODE
