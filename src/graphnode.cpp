@@ -36,11 +36,10 @@ void GraphNode::AddEdgeToChildNode(GraphEdge *edge)
 
 //// STUDENT CODE
 ////
-void GraphNode::MoveChatbotHere(ChatBot * &&chatbot)
+void GraphNode::MoveChatbotHere(ChatBot *chatbot)
 {
     _chatBot = chatbot;
     _chatBot->SetCurrentNode(this);
-    chatbot = nullptr;
 }
 
 void GraphNode::MoveChatbotToNewNode(GraphNode *newNode)
