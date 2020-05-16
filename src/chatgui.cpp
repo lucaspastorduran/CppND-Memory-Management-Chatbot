@@ -116,7 +116,7 @@ ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
 
     //// STUDENT CODE
     ////
-
+    
     std::cout << "ChatBotPanelDialog Constructor." << std::endl;
 
     // create chat logic instance
@@ -140,7 +140,8 @@ ChatBotPanelDialog::~ChatBotPanelDialog()
     
     std::cout << "ChatBotPanelDialog Destructor." << std::endl;
 
-    // delete _chatLogic; smart pointers are automatically deleted.
+    // delete _chatLogic; 
+    _chatLogic.reset(); // Redundant as smart pointers are automatically deleted.
 
     ////
     //// EOF STUDENT CODE

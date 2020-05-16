@@ -45,6 +45,63 @@ ChatBot::~ChatBot()
 //// STUDENT CODE
 ////
 
+// Copy constructor
+ChatBot::ChatBot(const ChatBot &chatbot)
+{
+    std::cout << "ChatBot Copy Constructor" << std::endl;
+
+    // Shallow copy: assume chatbot won't deallocate these objects
+    _image = chatbot._image;
+    _chatLogic = chatbot._chatLogic;
+    _rootNode = chatbot._rootNode;
+
+}
+
+// move constructor
+ChatBot::ChatBot(ChatBot&& chatbot)
+{
+    std::cout << "ChatBot Move Constructor" << std::endl;
+    
+    _image = std::exchange(chatbot._image, nullptr);
+    _chatLogic = std::exchange(chatbot._chatLogic, nullptr);
+    _rootNode = std::exchange(chatbot._rootNode, nullptr);
+}
+
+// Copy assignment operator
+ChatBot& ChatBot::operator = (const ChatBot &chatbot)
+{
+    std::cout << "ChatBot Copy Assignment" << std::endl;
+
+    if (this == &chatbot) 
+    {
+        return *this;
+    }
+
+    // Shallow copy: assume chatbot won't deallocate these objects
+    _image = chatbot._image;
+    _chatLogic = chatbot._chatLogic;
+    _rootNode = chatbot._rootNode;
+
+    return *this;
+}
+
+// move assignment operator
+ChatBot& ChatBot::operator=(ChatBot&& chatbot)
+{
+    std::cout << "ChatBot Move Assignment" << std::endl;
+
+    if (this == &chatbot) 
+    {
+        return *this;
+    }
+
+    std::swap(_image, chatbot._image);
+    std::swap(_chatLogic, chatbot._chatLogic);
+    std::swap(_rootNode, chatbot._rootNode);
+
+    return *this;
+}          
+
 ////
 //// EOF STUDENT CODE
 
