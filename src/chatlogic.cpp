@@ -45,14 +45,14 @@ ChatLogic::~ChatLogic()
     for (auto it = std::begin(_nodes); it != std::end(_nodes); ++it)
     {
         // delete *it;
-        it->reset();
+        it->reset(); // Should not be necessary as smart pointers are automatically de-allocated.
     }
 
     // delete all edges
-    for (auto it = std::begin(_edges); it != std::end(_edges); ++it)
+    /*for (auto it = std::begin(_edges); it != std::end(_edges); ++it)
     {
-        delete *it;
-    }
+        delete *it; Edges are owned by Graphnodes, so they de-allocate by the parent Graphnode.
+    }*/
 
     ////
     //// EOF STUDENT CODE
@@ -169,16 +169,18 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
                             auto childNode = std::find_if(_nodes.begin(), _nodes.end(), [&childToken](const std::unique_ptr<GraphNode> &node) { return node->GetID() == std::stoi(childToken->second); });
 
                             // create new edge
-                            GraphEdge *edge = new GraphEdge(id);
+                            // GraphEdge *edge = new GraphEdge(id);
+                            std::unique_ptr<GraphEdge> edge = std::make_unique<GraphEdge>(id);
+                            
                             edge->SetChildNode(childNode->get());
                             edge->SetParentNode(parentNode->get());
-                            _edges.push_back(edge);
+                            _edges.push_back(edge.get());
 
                             // find all keywords for current node
                             AddAllTokensToElement("KEYWORD", tokens, *edge);
 
                             // store reference in child node and parent node
-                            (*childNode)->AddEdgeToParentNode(edge);
+                            (*childNode)->AddEdgeToParentNode(edge.get());
                             (*parentNode)->AddEdgeToChildNode(edge);
                         }
 
